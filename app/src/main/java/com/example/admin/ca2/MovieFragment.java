@@ -72,8 +72,17 @@ public class MovieFragment extends Fragment {
         mDirector.setText("Director: " + mMovie.getDirector());
 
         //setActors
-        //mActors = (TextView) v.findViewById(R.id.movieActors);
-        //mActors.setText("Actors: " + mMovie.getActors().toString());
+        mActors = (TextView) v.findViewById(R.id.movieActors);
+        String actorsNames = "";
+        String comma = ", ";
+        for (int i=0; i < mMovie.getActors().length; i++) {
+            if (i == mMovie.getActors().length-1) {
+                comma = "";
+            }
+            actorsNames = actorsNames + mMovie.getActors()[i] + comma;
+        }
+
+        mActors.setText("Actors: " + actorsNames);
 
         //set view screen
         return v;

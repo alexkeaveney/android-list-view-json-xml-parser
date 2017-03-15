@@ -81,7 +81,9 @@ public class MovieXMLParser {
                                 case "category":
                                     m.setCategory(parser.getText());
                                 case "actors":
-                                    String[] animalsArray = parser.getText().split(",");
+                                    String actors = parser.getText();
+                                    String actorArray[] = actors.split(", ");
+                                    m.setActors(actorArray);
                                 case "photo":
                                     m.setPhotoLink(parser.getText());
                                 default:

@@ -100,6 +100,29 @@ public class MovieModel {
 
             return "Task complete";
         }
+//            @Override
+//            protected String doInBackground(String... params) {
+//
+//                movies = manager.getData("http://10.0.2.2:8888/httpconn/movies.json");
+//                MovieJSONParser myParser = new MovieJSONParser();
+//                this.movieList = myParser.parseFeed(movies);
+//
+//                for (int i =0; i < this.movieList.size(); i++) {
+//                    Bitmap image;
+//                    try {
+//                        URL url = new URL("http://10.0.2.2:8888/httpconn/" + this.movieList.get(i).getPhotoLink());
+//                        Log.d("URL", url.toString());
+//                        InputStream inputStream = url.openStream();
+//                        image = BitmapFactory.decodeStream(inputStream);
+//                        this.movieList.get(i).setImage(image);
+//                    }
+//                    catch (Exception e) {
+//                        Log.e("Aysnc Exception", "Cant decoded image for movie " + i);
+//                    }
+//                }
+//
+//                return "Task complete";
+//            }
 
         @Override
         protected void onProgressUpdate(String... values) {
