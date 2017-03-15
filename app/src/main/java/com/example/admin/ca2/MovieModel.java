@@ -97,24 +97,7 @@ public class MovieModel {
                     Log.e("Aysnc Exception", "Cant decoded image for movie " + i);
                 }
             }
-//            movies = manager.getData("http://10.0.2.2:8888/httpconn/movies.xml");
-//            MovieXMLParser myParser = new MovieXMLParser();
-//            movieList = myParser.parseFeed(movies);
-//
-//            for (int i =0; i < movieList.size(); i++) {
-//                Bitmap image;
-//                try {
-//                    URL url = new URL("http://10.0.2.2:8888/httpconn/" + movieList.get(i).getPhotoLink());
-//                    Log.d("URL", url.toString());
-//                    InputStream inputStream = url.openStream();
-//                    image = BitmapFactory.decodeStream(inputStream);
-//                    movieList.get(i).setImage(image);
-//                }
-//                catch (Exception e) {
-//                    Log.e("Aysnc Exception", "Cant decoded image for movie " + i);
-//                }
-//            }
-//
+
             return "Task complete";
         }
 
@@ -132,7 +115,7 @@ public class MovieModel {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("Async", "onPostExecute: Finished");
+            Log.d("Async Model", "onPostExecute: Finished");
             finished(this.movieList);
             //toggleVisibility()
         }

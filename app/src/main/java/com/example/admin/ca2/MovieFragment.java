@@ -72,8 +72,8 @@ public class MovieFragment extends Fragment {
         mDirector.setText("Director: " + mMovie.getDirector());
 
         //setActors
-//        mActors = (TextView) v.findViewById(R.id.movieActors);
-//        mActors.setText("Actors: " + mMovie.getActors().toString());
+        //mActors = (TextView) v.findViewById(R.id.movieActors);
+        //mActors.setText("Actors: " + mMovie.getActors().toString());
 
         //set view screen
         return v;

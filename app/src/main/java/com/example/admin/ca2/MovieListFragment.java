@@ -67,7 +67,7 @@ public class MovieListFragment extends ListFragment {
             if (null == convertView) {
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.movie_list_item, null);
             }
-
+            Log.d("Movie Adapter", "Called");
             Movie m = getItem(position);
             TextView titleTextView = (TextView)convertView.findViewById(R.id.titleTextView);
             titleTextView.setText(m.getTitle());
@@ -160,7 +160,7 @@ public class MovieListFragment extends ListFragment {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("Async", "onPostExecute: Finished");
+            Log.d("Async MovieListFragment", "on: Finished");
             finished(movies);
             //toggleVisibility()
         }
