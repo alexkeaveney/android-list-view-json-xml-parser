@@ -45,46 +45,59 @@ public class MovieModel {
     //This function is used to ensure only one instance of the class is created.
     public static MovieModel get(Context c) {
 
-
+        //if there isnt already a Movie model create one
         if (sMovieModel == null) {
             sMovieModel = new MovieModel(c.getApplicationContext());
         }
+        //returns the only instance of Movie Model
         return sMovieModel;
     }
 
-
+    //Gets a movie by its ID
     public Movie getMovie(int id) {
+
+        //loops through all of the movies
         for (int i =0; i < movieList.size(); i++) {
+
+            //If the passed in ID is equal to the movie id of that item in the list return the movie
             if (id == movieList.get(i).getId()) {
-                Log.d("Id=Movie", "It happens");
+
                 return movieList.get(i);
             }
         }
+        //otherwise return null (movie not found)
         return null;
     }
 
-    public MyTask returnTask() {
-        MyTask task = new MyTask();
-        task.execute("Param1", "Param2", "Param3");
-        return task;
-    }
 
+    //gets all of the movies
     public ArrayList<Movie> getMovies () {
 
         return movieList;
     }
 
+    //called when the task is complete
     protected void finished(ArrayList<Movie> movieList) {
 
+        //sets global movie list to retrieved list from task
         this.movieList = movieList;
 
     }
 
+
+    //class to create async tasks
     private class MyTask extends AsyncTask<String, String, String> {
 
+        //creates new HTTPManager object to do HTTP requests of external files
         HTTPManager manager = new HTTPManager();
+
+        //string to holds retrieved XML content in string format
         String movies;
+
+        //holds retreived movie list
         ArrayList<Movie> movieList;
+
+        //called at the beginning to show the user that the task has started
         @Override
         protected void onPreExecute() {
             //updateDisplay("Starting task");
@@ -92,24 +105,45 @@ public class MovieModel {
 
         }
 
+        //The task takes place in here
         @Override
         protected String doInBackground(String... params) {
 
+            //reads in the XML as a string and sets it equal to movies (String)
             movies = manager.getData("http://10.0.2.2:8888/httpconn/movies.xml");
-            MovieXMLParser myParser = new MovieXMLParser();
-            this.movieList = myParser.parseFeed(movies);
-            //ArrayList<Movie>movies
 
+            //create a new convert ("parser") to change the string XML content to Java Movie objects
+            MovieXMLParser myParser = new MovieXMLParser();
+
+            //sets the movie list to these retrieved object list
+            this.movieList = myParser.parseFeed(movies);
+
+            //loops through the movies
             for (int i =0; i < movieList.size(); i++) {
+
+                //creates Bitmap object to hold retrieved image
                 Bitmap image;
+
                 try {
+
+                    //creates url to image using movie objects photo link (from XML)
                     URL url = new URL("http://10.0.2.2:8888/httpconn/images/" + this.movieList.get(i).getPhotoLink());
-                    Log.d("URL", url.toString());
+
+                    //Debugging URL
+                    //Log.d("URL", url.toString());
+
+                    //creates a stream to that URL to get the image content
                     InputStream inputStream = url.openStream();
+
+                    //uses Java Bitmap Factory's decode Stream method to convert the retreived data to a bitmap object
                     image = BitmapFactory.decodeStream(inputStream);
+
+                    //sets the movie in the list Bitmap image to the retrieved one
                     this.movieList.get(i).setImage(image);
                 }
                 catch (Exception e) {
+
+                    //logs which image didnt decode
                     Log.e("Aysnc Exception", "Cant decoded image for movie " + i);
                 }
             }
@@ -140,6 +174,7 @@ public class MovieModel {
 //                return "Task complete";
 //            }
 
+        //To show the user where they are in the task
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
@@ -151,7 +186,7 @@ public class MovieModel {
 
         }
 
-
+        //Executed after the task has been completed
         @Override
         protected void onPostExecute(String result) {
             Log.d("Async Model", "onPostExecute: Finished");

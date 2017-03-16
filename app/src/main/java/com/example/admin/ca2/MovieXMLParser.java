@@ -48,7 +48,11 @@ public class MovieXMLParser {
                         // if starting a new product create a new Flower object to start building it up.
                         if (currentTagName.equals("movie")) {
                             inDataItemTag = true;
+
+                            //creates a new movie when it sees the movie tag
                             m = new Movie();
+
+                            //adds that movie to the list
                             movieList.add(m);
                         }
                         break;
@@ -64,6 +68,7 @@ public class MovieXMLParser {
                     case XmlPullParser.TEXT:
                         if (inDataItemTag && m != null) {
                             switch (currentTagName) {
+                                //searches through the tags looking for cases where the data matches up and sets that data in the movie object
                                 case "movieId":
                                     m.setId(Integer.parseInt(parser.getText()));
                                 case "name":
