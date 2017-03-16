@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class HTTPManager {
 
-    // A URI is passed in from MainActivity
+    // A URI is passed in from MovieModel
     // the content at this URI is returned
     public static String getData(String uri) {
 
@@ -21,9 +21,13 @@ public class HTTPManager {
             // open a connection to that URL
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
+            //used to hold the string read in from the file
             StringBuilder sb = new StringBuilder();
+
+            //Users to read the stream of characters read in from the file
             reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
+            //holds a line of characters
             String line;
 
             // the reader will continue to read in from the input stream till everything is read in

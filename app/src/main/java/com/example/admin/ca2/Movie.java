@@ -1,7 +1,6 @@
 package com.example.admin.ca2;
 
 import android.graphics.Bitmap;
-import android.media.Image;
 
 import java.util.Date;
 
@@ -57,6 +56,8 @@ public class Movie {
         this.releaseDate = releaseDate;
         this.photoLink = photoLink;
     }
+
+    //mutator and accessor functions for all of the above variables
 
     public int getId() { return this.id; }
     public void setId(int id) { this.id = id; }

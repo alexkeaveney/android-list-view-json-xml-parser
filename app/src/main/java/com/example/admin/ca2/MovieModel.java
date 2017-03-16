@@ -17,19 +17,35 @@ import java.util.ArrayList;
 
 public class MovieModel {
 
+    //holds arraylist of movies
     private ArrayList<Movie> movieList;
+
+    //holds the only instance of the Movie Model class
     private static MovieModel sMovieModel;
+
+    //Holds the context
     private Context sAppContext;
 
+    //movie model needs to be passed a context
     public MovieModel(Context appContext) {
+
+        //sets the global context
         this.sAppContext = appContext;
+
+        //creates an arraylist of movies
         this.movieList = new ArrayList<>();
 
+        //creates a task for getting the information
         MyTask task = new MyTask();
+
+        //starts the task
         task.execute("Param1", "Param2", "Param3");
     }
 
+    //This function is used to ensure only one instance of the class is created.
     public static MovieModel get(Context c) {
+
+
         if (sMovieModel == null) {
             sMovieModel = new MovieModel(c.getApplicationContext());
         }
@@ -87,7 +103,7 @@ public class MovieModel {
             for (int i =0; i < movieList.size(); i++) {
                 Bitmap image;
                 try {
-                    URL url = new URL("http://10.0.2.2:8888/httpconn/" + this.movieList.get(i).getPhotoLink());
+                    URL url = new URL("http://10.0.2.2:8888/httpconn/images/" + this.movieList.get(i).getPhotoLink());
                     Log.d("URL", url.toString());
                     InputStream inputStream = url.openStream();
                     image = BitmapFactory.decodeStream(inputStream);
@@ -110,7 +126,7 @@ public class MovieModel {
 //                for (int i =0; i < this.movieList.size(); i++) {
 //                    Bitmap image;
 //                    try {
-//                        URL url = new URL("http://10.0.2.2:8888/httpconn/" + this.movieList.get(i).getPhotoLink());
+//                        URL url = new URL("http://10.0.2.2:8888/httpconn/images/" + this.movieList.get(i).getPhotoLink());
 //                        Log.d("URL", url.toString());
 //                        InputStream inputStream = url.openStream();
 //                        image = BitmapFactory.decodeStream(inputStream);

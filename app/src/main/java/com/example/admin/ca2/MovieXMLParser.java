@@ -80,12 +80,18 @@ public class MovieXMLParser {
                                     break;
                                 case "category":
                                     m.setCategory(parser.getText());
+                                    break;
+                                case "director":
+                                    m.setDirector(parser.getText());
+                                    break;
                                 case "actors":
                                     String actors = parser.getText();
                                     String actorArray[] = actors.split(", ");
                                     m.setActors(actorArray);
+                                    break;
                                 case "photo":
                                     m.setPhotoLink(parser.getText());
+                                    break;
                                 default:
                                     break;
                             }
